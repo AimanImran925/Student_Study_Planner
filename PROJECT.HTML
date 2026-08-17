@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyFlow | Student Study Planner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="PROJECT.CSS">
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        
+        <aside class="sidebar" id="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">S</div>
+
+                <div>
+                    <h1>StudyFlow</h1>
+                    <p>Student Planner</p>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+
+                <button class="nav-link active" data-section="dashboardSection">
+                    <span>▦</span>
+                    Dashboard
+                </button>
+
+                <button class="nav-link" data-section="tasksSection">
+                    <span>✓</span>
+                    Tasks
+                </button>
+
+                <button class="nav-link" data-section="subjectsSection">
+                    <span>◈</span>
+                    Subjects
+                </button>
+
+                <button class="nav-link" data-section="progressSection">
+                    <span>↗</span>
+                    Progress
+                </button>
+
+                <button class="nav-link" data-section="settingsSection">
+                    <span>⚙</span>
+                    Settings
+                </button>
+
+            </nav>
+
+            <div class="sidebar-tip">
+                <span class="tip-icon">✦</span>
+
+                <h3>Stay consistent</h3>
+
+                <p>
+                    Small steps every day create big results.
+                </p>
+            </div>
+
+            <button class="profile-mini" id="sidebarProfileButton">
+
+                <span class="avatar small-avatar">AI</span>
+
+                <span class="profile-mini-text">
+                    <strong id="sidebarStudentName">Aiman Imran</strong>
+                    <small>Student</small>
+                </span>
+
+                <span>•••</span>
+
+            </button>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <button class="menu-button" id="menuButton">
+                    ☰
+                </button>
+
+                <div class="welcome-text">
+
+                    <p id="currentDate"></p>
+
+                    <h2>
+                        Good morning,
+                        <span id="welcomeStudentName">Aiman</span>
+                         <span class="wave">✦</span> 
+                    </h2>
+
+                </div>
+
+                <div class="topbar-actions">
+
+                    <label class="search-box">
+
+                        <span>⌕</span>
+
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="Search tasks..."
+                        >
+
+                    </label>
+
+                    <button
+                        class="icon-button"
+                        id="notificationButton"
+                        aria-label="Notifications"
+                    >
+                        ♧
+                        <span class="notification-dot"></span>
+                    </button>
+
+                    <button
+                        class="avatar"
+                        id="topProfileButton"
+                    >
+                        AI
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <section
+                class="page-section active-section"
+                id="dashboardSection"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+                        <p class="eyebrow">OVERVIEW</p>
+                        <h3>Your study dashboard</h3>
+                    </div>
+
+                    <button
+                        class="primary-button"
+                        id="openTaskModalButton"
+                    >
+                        <span>+</span>
+                        Add new task
+                    </button>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <article class="stat-card blue-card">
+
+                        <div class="stat-card-top">
+                            <span>Total tasks</span>
+                            <span class="stat-icon">▤</span>
+                        </div>
+
+                        <strong id="totalTasks">0</strong>
+
+                        <p>All your tasks</p>
+
+                    </article>
+
+
+                    <article class="stat-card purple-card">
+
+                        <div class="stat-card-top">
+                            <span>Completed</span>
+                            <span class="stat-icon">✓</span>
+                        </div>
+
+                        <strong id="completedTasks">0</strong>
+
+                        <p>Great work!</p>
+
+                    </article>
+
+
+                    <article class="stat-card orange-card">
+
+                        <div class="stat-card-top">
+                            <span>Pending</span>
+                            <span class="stat-icon">◷</span>
+                        </div>
+
+                        <strong id="pendingTasks">0</strong>
+
+                        <p>Keep going</p>
+
+                    </article>
+
+
+                    <article class="stat-card green-card">
+
+                        <div class="stat-card-top">
+                            <span>Overall progress</span>
+                            <span class="stat-icon">↗</span>
+                        </div>
+
+                        <strong id="overallProgress">0%</strong>
+
+                        <div class="mini-progress">
+                            <span id="miniProgressBar"></span>
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+
+                    <section class="panel">
+
+                        <div class="panel-heading">
+
+                            <div>
+                                <p class="eyebrow">YOUR WORK</p>
+                                <h3>Recent tasks</h3>
+                            </div>
+
+                            <button
+                                class="text-button"
+                                id="dashboardTasksButton"
+                            >
+                                View all →
+                            </button>
+
+                        </div>
+
+                        <div
+                            class="task-list"
+                            id="dashboardTaskList"
+                        ></div>
+
+                    </section>
+
+
+                    <section class="panel progress-panel">
+
+                        <div class="panel-heading">
+
+                            <div>
+                                <p class="eyebrow">YOUR GOALS</p>
+                                <h3>Progress overview</h3>
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="progress-ring"
+                            id="progressRing"
+                        >
+
+                            <div>
+                                <strong id="ringProgress">0%</strong>
+                                <span>completed</span>
+                            </div>
+
+                        </div>
+
+                        <div class="progress-summary">
+
+                            <div>
+                                <span class="legend-dot completed-dot"></span>
+                                Completed
+                                <strong id="progressCompletedText">
+                                    0 tasks
+                                </strong>
+                            </div>
+
+                            <div>
+                                <span class="legend-dot pending-dot"></span>
+                                Pending
+                                <strong id="progressPendingText">
+                                    0 tasks
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+                <div class="bottom-grid">
+
+                    <section class="panel">
+
+                        <div class="panel-heading">
+
+                            <div>
+                                <p class="eyebrow">LEARNING AREAS</p>
+                                <h3>Your subjects</h3>
+                            </div>
+
+                            <button
+                                class="text-button"
+                                id="dashboardSubjectsButton"
+                            >
+                                See all →
+                            </button>
+
+                        </div>
+
+                        <div
+                            class="subject-grid"
+                            id="dashboardSubjectGrid"
+                        ></div>
+
+                    </section>
+
+
+                    <section class="panel">
+
+                        <div class="panel-heading">
+
+                            <div>
+                                <p class="eyebrow">DEADLINES</p>
+                                <h3>Upcoming deadlines</h3>
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="deadline-list"
+                            id="dashboardDeadlineList"
+                        ></div>
+
+                    </section>
+
+                </div>
+
+            </section>
+
+            <section
+                class="page-section"
+                id="tasksSection"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+                        <p class="eyebrow">YOUR WORK</p>
+                        <h3>Tasks</h3>
+                    </div>
+
+                    <button
+                        class="primary-button"
+                        id="tasksAddButton"
+                    >
+                        + Add task
+                    </button>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div
+                        class="filter-row"
+                        id="filterRow"
+                    >
+
+                        <button
+                            class="filter-button active"
+                            data-filter="all"
+                        >
+                            All
+                        </button>
+
+                        <button
+                            class="filter-button"
+                            data-filter="pending"
+                        >
+                            Pending
+                        </button>
+
+                        <button
+                            class="filter-button"
+                            data-filter="completed"
+                        >
+                            Completed
+                        </button>
+
+                        <button
+                            class="filter-button"
+                            data-filter="high"
+                        >
+                            High priority
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="task-list"
+                        id="taskList"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <section
+                class="page-section"
+                id="subjectsSection"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+                        <p class="eyebrow">LEARNING AREAS</p>
+                        <h3>Your subjects</h3>
+                    </div>
+
+                </div>
+
+                <div
+                    class="full-subject-grid"
+                    id="fullSubjectGrid"
+                ></div>
+
+            </section>
+
+
+            <section
+                class="page-section"
+                id="progressSection"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+                        <p class="eyebrow">YOUR GOALS</p>
+                        <h3>Progress</h3>
+                    </div>
+
+                </div>
+
+                <div class="progress-page-grid">
+
+                    <div class="panel progress-panel">
+
+                        <div
+                            class="large-progress-ring"
+                            id="largeProgressRing"
+                        >
+                            <div>
+                                <strong id="largeRingProgress">0%</strong>
+                                <span>completed</span>
+                            </div>
+                        </div>
+
+                        <div class="progress-summary">
+
+                            <div>
+                                Completed
+                                <strong id="largeCompletedText">
+                                    0 tasks
+                                </strong>
+                            </div>
+
+                            <div>
+                                Pending
+                                <strong id="largePendingText">
+                                    0 tasks
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <p class="eyebrow">SUBJECT PROGRESS</p>
+
+                        <h3 class="progress-title">
+                            Progress by subject
+                        </h3>
+
+                        <div
+                            class="subject-progress-list"
+                            id="subjectProgressList"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section
+                class="page-section"
+                id="settingsSection"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+                        <p class="eyebrow">PREFERENCES</p>
+                        <h3>Settings</h3>
+                    </div>
+
+                </div>
+
+                <div class="panel settings-panel">
+
+                    <label for="studentNameInput">
+                        Your name
+                    </label>
+
+                    <input
+                        id="studentNameInput"
+                        type="text"
+                        placeholder="Enter your name"
+                    >
+
+                    <button
+                        class="primary-button"
+                        id="saveSettingsButton"
+                    >
+                        Save settings
+                    </button>
+
+                    <button
+                        class="danger-button"
+                        id="resetTasksButton"
+                    >
+                        Reset sample tasks
+                    </button>
+
+                    <p
+                        id="settingsMessage"
+                        class="success-message"
+                    ></p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <div
+        class="modal hidden"
+        id="taskModal"
+        role="dialog"
+        aria-modal="true"
+    >
+
+        <div class="modal-card">
+
+            <div class="modal-heading">
+
+                <div>
+                    <p class="eyebrow">TASK PLANNER</p>
+                    <h3 id="modalTitle">Add a new task</h3>
+                </div>
+
+                <button
+                    class="close-button"
+                    id="closeTaskModalButton"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="taskForm">
+
+                <input
+                    type="hidden"
+                    id="editingTaskId"
+                >
+
+                <label for="taskTitle">
+                    Task title *
+                </label>
+
+                <input
+                    id="taskTitle"
+                    type="text"
+                    placeholder="e.g. Finish portfolio project"
+                    required
+                >
+
+
+                <div class="form-two-columns">
+
+                    <div>
+
+                        <label for="taskSubject">
+                            Subject *
+                        </label>
+
+                        <select id="taskSubject" required>
+
+                            <option value="">
+                                Choose subject
+                            </option>
+
+                            <option>
+                                Web Development
+                            </option>
+
+                            <option>
+                                Data Science
+                            </option>
+
+                            <option>
+                                Excel
+                            </option>
+
+                            <option>
+                                Machine Learning
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="taskPriority">
+                            Priority
+                        </label>
+
+                        <select id="taskPriority">
+
+                            <option value="low">Low</option>
+
+                            <option
+                                value="medium"
+                                selected
+                            >
+                                Medium
+                            </option>
+
+                            <option value="high">High</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <label for="taskDueDate">
+                    Due date *
+                </label>
+
+                <input
+                    id="taskDueDate"
+                    type="date"
+                    required
+                >
+
+                <p
+                    class="form-error"
+                    id="formError"
+                ></p>
+
+                <button
+                    class="primary-button full-button"
+                    type="submit"
+                >
+                    Save task
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="toast"
+        id="toast"
+        role="status"
+    ></div>
+
+    
+    <script src="PROJECT.JS"></script>
+
+</body>
+
+</html>
